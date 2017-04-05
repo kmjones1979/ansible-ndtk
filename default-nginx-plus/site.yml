@@ -1,0 +1,8 @@
+---
+- name: install NGINX Plus
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
+    - nginx-plus
