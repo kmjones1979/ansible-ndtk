@@ -1,3 +1,3 @@
 #---
 #- name: install pre-reqs here
-#  yum: name=package_here state=present
+#  apt: name=package_here state=present
