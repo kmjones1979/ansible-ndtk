@@ -12,8 +12,8 @@
 
 - name: copy default NGINX configuration files
   copy:
-    src: etc/nginx/
-    dest: /etc/nginx/
+    src: etc/nginx/*
+    dest: /etc/nginx/*
 
 - name: download sources.list.d for NGINX Plus on current version
   shell: printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" | sudo tee /etc/apt/sources.list.d/nginx-plus.list
