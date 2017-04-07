@@ -1,0 +1,30 @@
+---
+- name: create backup directory
+  file:
+    path: /var/backups
+    state: directory
+    mode: 0755
+
+- name: backup /etc/nginx/ folder
+  shell: cp -a /etc/nginx /var/backups/nginx-conf-backup-$(date +%s | sha256sum | base64 | head -c 32 ; echo)
+  ignore_errors: yes
+
+- name: backup /etc/nginx/ folder
+  shell: cp -a /var/log/nginx /var/backups/nginx-log-backup-$(date +%s | sha256sum | base64 | head -c 32 ; echo)
+  ignore_errors: yes
+
+- name: install apt-transport-https
+  apt: 
+    name: apt-transport-https 
+    state: present
+
+- name: install lsb-release
+  apt: 
+    name: lsb-release 
+    state: present
+
+- name: install ca-certificates
+  apt: 
+    name: ca-certificates 
+    state: present
+
