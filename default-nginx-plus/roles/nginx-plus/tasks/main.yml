@@ -1,7 +1,44 @@
 ---
+- name: create SSL directory
+  shell: mkdir -p /etc/ssl/nginx
+
+- name: download and install signing key
+  shell: wget http://nginx.org/keys/nginx_signing.key && sudo apt-key add nginx_signing.key
+
+- name: copy the NGINX Plus cert and key
+  copy: 
+    src: etc/ssl/nginx/ 
+    dest: /etc/ssl/nginx/
+
+- name: copy default NGINX configuration files
+  copy:
+    src: etc/nginx/
+    dest: /etc/nginx/
+
+- name: download sources.list.d for NGINX Plus on current version
+  shell: printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" | sudo tee /etc/apt/sources.list.d/nginx-plus.list
+
+- name: download apt configuration
+  shell: wget -P /etc/apt/apt.conf.d https://cs.nginx.com/static/files/90nginx
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+
 - name: install nginx plus
-  apt: name=nginx-plus state=present
+  apt: 
+    name: nginx-plus 
+    state: present
+  notify: start nginx
 
 - name: copy nginx configuration
-  template: src=etc/nginx/conf.d/default.conf dest=/etc/nginx/conf.d/default.conf
+  template: 
+    src: etc/nginx/nginx.conf 
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: copy nginx configuration
+  template: 
+    src: etc/nginx/conf.d/default.conf 
+    dest: /etc/nginx/conf.d/default.conf
   notify: restart nginx
