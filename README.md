@@ -1,8 +1,8 @@
 # NGINX Demo Toolkit
 
-Setup on client side requires Ansible 2.0+, I typically use Ubuntu 16.04 so all commands in this README will be for Ubunutu.
+Setup on client side requires Ansible 2.0+. I also use Ubuntu 16.04 in my scripting so if you use a different distro the playbooks and scripts contained in this github repository will need to be altered.
 
-#### Install Ansible
+#### Install Ansible (Client side)
 
 ```
 $ sudo apt-get install software-properties-common
@@ -21,11 +21,21 @@ $ cd ansible-ndtk
 
 #### Setup Environment
 
-First we will create a hosts file that Ansible will use to deploy.
+The following make command will setup all of the pre-requisites for running this script. It will...
+1. Create a basic "hosts" file for the Ansible deployment (pointing at 127.0.0.1).
+2. Create a directory where you will store your unique key and certificate needed to deploy and install NGINX Plus within your environment.
 
 ```
-$ echo "[nginx-plus]" | tee hosts
-$ echo "127.0.0.1" | tee -a hosts
+$ make setup
+```
+
+
+#### Help
+
+For help, using the make help command you can list the associated comments for each option in the Makefile.
+
+```
+$ make help
 ```
 
 Note: when using SSH key authentication no password is required and the --ask-pass flags can be removed from the Makefile
