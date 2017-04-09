@@ -6,17 +6,17 @@ help:	##
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 install:
-	## make install - installs "NGINX Plus"
+	## make install 		: installs "NGINX Plus"
 	ansible-playbook --ask-pass -i hosts install-nginx-plus/site.yml
 
 default:
-	## make default - resets nginx configurations to default
+	## make default 		: resets nginx configurations to default
 	ansible-playbook --ask-pass -i hosts default-configuration/site.yml
 
 template:
-	## make template - generates an nginx ansible playbook template configuration
+	## make template 		: generates an nginx ansible playbook template configuration
 	cp -R default-configuration template-${HASH}
 
 deploy:
-	## make deploy FOO=BAR - deploys specific ansible playbook folder
+	## make deploy FOO=BAR	: deploys specific ansible playbook folder
 	ansible-playbook --ask-pass -i hosts ${FOO}/site.yml
