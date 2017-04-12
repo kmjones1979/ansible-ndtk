@@ -17,11 +17,11 @@ install:
 
 default:
 	## make default 		: resets nginx configurations to default
-	ansible-playbook --ask-pass -i hosts default_configuration/site.yml
+	ansible-playbook --ask-pass -i hosts default_nginx_configuration/site.yml
 
 template:
 	## make template 		: generates an nginx ansible playbook template configuration
-	cp -R default_configuration template_${HASH}
+	cp -R default_nginx_configuration template_${HASH}
 
 deploy:
 	## make deploy f=foo_bar	: deploys specific ansible playbook folder
