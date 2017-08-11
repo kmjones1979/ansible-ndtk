@@ -1,9 +1,13 @@
 ---
 - name: create SSL directory
-  shell: mkdir -p /etc/ssl/nginx
+  file: 
+    path: /etc/ssl/nginx
+    state: directory
 
-- name: download and install signing key
-  shell: wget http://nginx.org/keys/nginx_signing.key && sudo apt-key add nginx_signing.key
+- name: install nginx signing key
+  apt_key: 
+    url: http://nginx.org/keys/nginx_signing.key
+    state: present
 
 - name: copy the NGINX Plus cert and key
   copy: 
@@ -14,7 +18,7 @@
   shell: printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" | sudo tee /etc/apt/sources.list.d/nginx-plus.list
 
 - name: download apt configuration
-  shell: wget -P /etc/apt/apt.conf.d https://cs.nginx.com/static/files/90nginx
+  get_url: url=https://cs.nginx.com/static/files/90nginx dest=/etc/apt/apt.conf.d/90nginx mode=0700
 
 - name: update apt cache
   apt:
