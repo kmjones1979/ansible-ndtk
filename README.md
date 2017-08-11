@@ -11,6 +11,12 @@ $ sudo apt-get update
 $ sudo apt-get install ansible
 ```
 
+#### Install make
+
+```
+$ sudo apt-get install build-essential
+```
+
 
 #### Checkout ansible-ndtk
 
@@ -18,6 +24,7 @@ $ sudo apt-get install ansible
 $ git clone https://github.com/kmjones1979/ansible-ndtk.git
 $ cd ansible-ndtk
 ```
+
 
 #### Setup Environment
 
@@ -29,6 +36,16 @@ The following make command will setup all of the pre-requisites for running this
 $ make setup
 ```
 
+#### Copy NGINX Plus certificate and key to deployment folder
+
+The key and crt file file should be placed in the following directory.
+
+```
+ls -l install_nginx_plus/roles/nginx-plus/files/etc/ssl/nginx/
+total 8
+-rw-r--r-- 1 root root 1334 Aug 11 18:25 nginx-repo.crt
+-rw-r--r-- 1 root root 1704 Aug 11 18:25 nginx-repo.key
+```
 
 #### Help
 
