@@ -2,19 +2,23 @@
 
 Setup on client side requires Ansible 2.0+. I also use Ubuntu 16.04 in my scripting so if you use a different distro the playbooks and scripts contained in this github repository will need to be altered.
 
+#### Updte Ubuntu
+```
+$ sudo apt-get update -y
+```
+
 #### Install Ansible (Client side)
 
 ```
-$ sudo apt-get install software-properties-common
+$ sudo apt-get install -y software-properties-common
 $ sudo apt-add-repository ppa:ansible/ansible
-$ sudo apt-get update
-$ sudo apt-get install ansible
+$ sudo apt-get install -y ansible
 ```
 
 #### Install make
 
 ```
-$ sudo apt-get install build-essential
+$ sudo apt-get install -y build-essential
 ```
 
 
