@@ -1,0 +1,8 @@
+---
+- name: reset default NGINX configuration
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
+    - nginx-plus
